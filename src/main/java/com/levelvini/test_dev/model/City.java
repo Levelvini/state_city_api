@@ -18,6 +18,7 @@ import java.util.UUID;
 public class City {
     @Id
     @EqualsAndHashCode.Include
+    @Column(name = "city_id")
     private final String id = IdGenerate.idGenerate();
     private final String name;
     @ManyToOne

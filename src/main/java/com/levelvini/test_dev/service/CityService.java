@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,9 +41,9 @@ public class CityService {
     }
 
     @Transactional
-    private Optional<CityDTO> post(CityDTO city){
-        City toDTO = mapper.map(city,City.class);
-        return Optional.of(mapper.map(repository.save(toDTO),CityDTO.class));
+    private String post(CityDTO city){
+        City saved = repository.save(mapper.map(city,City.class));
+        return String.format("The city %s has been saved",saved.getName());
     }
 
     @Transactional

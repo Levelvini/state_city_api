@@ -21,6 +21,7 @@ public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
+    @Column(name = "state_id")
     private final String id = IdGenerate.idGenerate();
     private final String name;
     private final String abbreviation;
