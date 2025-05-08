@@ -1,5 +1,6 @@
 package com.levelvini.test_dev.model;
 
+import com.levelvini.test_dev.utils.IdGenerate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -13,13 +14,13 @@ import java.util.UUID;
 @Getter
 @Setter
 @EqualsAndHashCode
+@Table(name = "cities")
 public class City {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private final UUID id;
+    private final String id = IdGenerate.idGenerate();
     private final String name;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;
 }

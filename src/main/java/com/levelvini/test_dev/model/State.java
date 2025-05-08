@@ -1,5 +1,6 @@
 package com.levelvini.test_dev.model;
 
+import com.levelvini.test_dev.utils.IdGenerate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -20,9 +21,9 @@ public class State {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private final UUID id;
+    private final String id = IdGenerate.idGenerate();
     private final String name;
-    private final String Abbreviation;
+    private final String abbreviation;
     @OneToMany(mappedBy = "state",cascade = CascadeType.ALL)
     private List<City> cities;
 }
