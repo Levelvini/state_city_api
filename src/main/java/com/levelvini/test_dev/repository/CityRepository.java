@@ -6,8 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public interface CityRepository extends BaseRepository<City> {
-    @Query("SELECT c.name FROM City as c WHERE id = CityId")
-    public City findByState(String StateId,String CityId);
+public interface CityRepository extends JpaRepository<City,String> {
+//    @Query("SELECT c.name FROM City as c WHERE id = CityId")
+//    public City findByState(String StateId,String CityId);
+
+    Optional<City> findByIdAndStateId(String city_id, String state_id);
 }

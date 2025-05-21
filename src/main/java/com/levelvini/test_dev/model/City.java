@@ -2,15 +2,11 @@ package com.levelvini.test_dev.model;
 
 import com.levelvini.test_dev.utils.IdGenerate;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-import java.util.UUID;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -20,7 +16,7 @@ public class City {
     @EqualsAndHashCode.Include
     @Column(name = "city_id")
     private final String id = IdGenerate.idGenerate();
-    private final String name;
+    private String name;
     @ManyToOne
     @JoinColumn(name = "state_id")
     private State state;

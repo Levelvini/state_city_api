@@ -22,12 +22,12 @@ public class CityService {
     CityRepository repository;
 
     @Transactional
-    private Long getCityQuantity(){
+    public Long getCityQuantity(){
         return repository.count();
     }
 
     @Transactional
-    private List<CityDTO> getAll(){
+    public List<CityDTO> getAll(){
         List<City> cities = repository.findAll();
         if (cities.isEmpty()){
             throw new EmptyDataException("There is no data registered yet");
@@ -35,27 +35,33 @@ public class CityService {
         return cities.stream().map(city -> mapper.map(city,CityDTO.class)).collect(Collectors.toList());
     }
 
+    public Optional<CityDTO> getByState(String state_id, String city_id){
+        return Optional.ofNullable(mapper.map(repository.findByIdAndStateId(city_id, state_id).orElseThrow(() -> new ResourceNotFoundException("city not found")), CityDTO.class));
+    }
+
+
     @Transactional
-    private Optional<CityDTO> getById(String id){
+    public Optional<CityDTO> getById(String id){
         return Optional.ofNullable(mapper.map(repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City not found")), CityDTO.class));
     }
 
     @Transactional
-    private String post(CityDTO city){
+    public String post(CityDTO city){
         City saved = repository.save(mapper.map(city,City.class));
         return String.format("The city %s has been saved",saved.getName());
     }
 
     @Transactional
-    private String Update(String id, CityDTO cityDTO){
+    public String Update(String id, CityDTO cityDTO){
         City city = repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("City not founded"));
         repository.save(mapper.map(cityDTO, City.class));
         return "the city as up to date";
     }
 
     @Transactional
-    private String delete(String id){
+    public String delete(String id){
         repository.delete(repository.findById(id).orElseThrow(()-> new ResourceNotFoundException("City not founded")));
         return "the city has bee deleted";
     }
+
 }

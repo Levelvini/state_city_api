@@ -1,11 +1,14 @@
 package com.levelvini.test_dev.exceptions.treatment;
 
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 public class ErroResponse {
-    private String message;
+
     private LocalDateTime timestamp;
-    private HttpStatus httpStatus;
+    private String message;
+    private String httpStatus;
 }
